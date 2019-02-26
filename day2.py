@@ -82,3 +82,75 @@ tuple_test3 = ()  # 空
 tuple_test
 tuple_test[3][1] = '2143'
 tuple_test
+
+# if
+age = 3
+if age >= 18:
+    print('adult')
+elif age >= 6:
+    print('teenager')
+else:
+    print('kid')
+
+s = input('birth: ')
+birth = int(s)
+if birth < 2000:
+    print('00前')
+else:
+    print('00后')
+
+# for 循环 不需要对条件自增
+list_0_100 = list(range(101))  # 创建一个0-100 的list
+sum = 0
+for index in list_0_100:  # 冒号和if一样不要忘记
+    sum = index + sum
+sum
+
+# while 要自增判断条件
+sum = 0
+n = 0
+while n < 101:
+    sum = sum + n
+    n = n + 1
+print(sum)
+
+# break
+n = 0
+while n < 100:
+    if n % 2 == 0:
+        print(n)
+    if n > 20:
+        break
+    n = n + 1
+
+# continue
+n = 0
+while n < 100:
+    n = n + 1
+    if n % 2 == 0:
+        continue
+    print(n)
+
+# dict test   大括号创建     中括号读取 key必须不可变
+dict_test = {'sun': 99, 'chen': 85, 'pan': 70}
+dict_test['sun']
+dict_test['sun'] = 100
+dict_test
+'sun' in dict_test
+'li' in dict_test
+dict_test.get('sun', -1)
+dict_test.get('li', -1)
+dict_test.pop('pan')
+dict_test
+
+# set 无序无重复
+set_test = set([1, 2, 3])  # set 以list 为参数
+set_test.remove(1)
+set_test
+set_test.add('23')
+set_test2 = set((2, 3, 4, '234'))
+set_test & set_test2
+set_test | set_test2
+set_test3 = ([1, 2, 3, [44, 4]])  # 报错，不可入可变的lisit为key
+
+
