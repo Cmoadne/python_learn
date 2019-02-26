@@ -153,4 +153,4 @@ set_test & set_test2
 set_test | set_test2
 set_test3 = ([1, 2, 3, [44, 4]])  # 报错，不可入可变的lisit为key
 
-
+help(abs)
