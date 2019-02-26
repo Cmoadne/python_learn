@@ -1,8 +1,12 @@
 # 导入函数
-# 必选参数 默认参数 可变参数 关键字参数 命名关键字参数
+# 必选参数 默认参数 可变参数 命名关键字参数 关键字参数
 from function import my_abs
 from function import my_move
 from function import my_var
+from function import my_arg
+from function import my_arg2_1
+from function import my_arg2_2
+from function import my_all_arg
 
 a = abs(-5)
 a
@@ -19,8 +23,32 @@ help(hex)
 print(my_abs(-5))
 # my_abs('a')
 
+# 默认参数
 nxy = my_move(100, 100, 100, 100)
 nxy = my_move(100, 100, angle=100)  # 对指定参数赋值
 print(nxy)  # 返回多个值时，返回一个tuple
 
+# 可变参数
 print(my_var(*[1, 2, 3, 4]))  # 加*调用可变参数
+
+# 关键字参数
+my_arg('sunchen', 32)
+my_arg('sunchen', 23, city='beijing')
+extra = {'city': 'beijig', 'job': 'xixix'}
+my_arg('sunchen', 23, **extra)
+
+# 命名关键字参数
+my_arg2_1('sunchen', 23, city='jiax', job='office')
+# 有可变参数  可变参数可以是list 或者tuple
+my_arg2_2('sunchen', 23, *(), city='jiaxing')
+my_arg2_2('sunchen', 23, *(1, 2, 3, 4), city='jiaxing')
+
+# 所有参数集合
+my_all_arg('sunchen', 23, *(), city='jiaxing', job='office')
+extra2 = {'job': 'office'}
+my_all_arg('sunchen', 23, *[2, 3, 4], city='jiaxing', **extra2)
+
+# 可以通过tuple(list) + dicr 实现所有参数调用
+agrs = ('sunchen', 23, (1, 3, 2))
+kw2 = {'city': 'jiaxing', 'job': 'office'}
+my_all_arg(*agrs, **kw2)
