@@ -7,6 +7,8 @@ from function import my_arg
 from function import my_arg2_1
 from function import my_arg2_2
 from function import my_all_arg
+from function import my_fact
+from function import my_fact_tail
 
 a = abs(-5)
 a
@@ -46,9 +48,14 @@ my_arg2_2('sunchen', 23, *(1, 2, 3, 4), city='jiaxing')
 # 所有参数集合
 my_all_arg('sunchen', 23, *(), city='jiaxing', job='office')
 extra2 = {'job': 'office'}
-my_all_arg('sunchen', 23, *[2, 3, 4], city='jiaxing', **extra2)
+extra_list = [2, 3, 4]
+my_all_arg('sunchen', 23, 1996, *extra_list, city='jiaxing', **extra2)
 
 # 可以通过tuple(list) + dicr 实现所有参数调用
-agrs = ('sunchen', 23, (1, 3, 2))
-kw2 = {'city': 'jiaxing', 'job': 'office'}
+# 将位置参数和关键字参数分离, 有默认值可以不穿参数，
+agrs = ('sunchen', 23, 1997, *())
+kw2 = {'job': 'office'}
 my_all_arg(*agrs, **kw2)
+
+print(my_fact(100))
+print(my_fact_tail(100, 1))

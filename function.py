@@ -57,6 +57,22 @@ def my_arg2_2(name, age, *number, city, job='engineer'):
 
 
 # 所有参数，必选 默认 可变 命名关键字 关键字
-def my_all_arg(name, age=23, *number, city, **kw):
-    print('name:', name, 'age：', age, 'numbers:', number, 'city:', city, 'kw:',
-          kw)
+def my_all_arg(name, age=23, year=1995, *number, city='beijing', **kw):
+    print('name:', name, 'age：', age, 'year:', year, 'numbers:', number,
+          'city:', city, 'kw:', kw)
+
+
+# 递归
+def my_fact(n):
+    if n == 1:
+        return 1
+    else:
+        return n * my_fact(n - 1)
+
+
+# 尾递归，可以不让栈溢出，但是python解释器没有做优化，所以还是溢出
+def my_fact_tail(n, product):
+    if n == 1:
+        return product
+    else:
+        return my_fact_tail(n - 1, n * product)
