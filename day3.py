@@ -1,14 +1,33 @@
-def fab_2(max_now):
-    a = 0
-    b = 1
-    n = 0
-    while n < max_now:
-        yield b
-        a, b = b, a + b
-        n = n + 1
-    return 'done'
+def odd_from3():
+    n = 3
+    while True:
+        yield n
+        n = n + 2
 
 
-L_g = fab_2(3)  # 生成
-for i in L_g:
-    print(i)
+def division(n):
+    return lambda x: x % n > 0
+
+
+def primes():
+    yield 2
+    it = odd_from3()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(division(n), it)
+
+
+L = []
+num = 0
+for x in primes():
+
+    if x < 100:
+        L.append(x)
+        num = num + 1
+        # print(x)
+    else:
+        # print('num = %d' % num)
+        break
+
+print(L, num)
