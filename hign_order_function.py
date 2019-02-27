@@ -1,4 +1,5 @@
 from functools import reduce
+import functools
 
 
 # 把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
@@ -92,5 +93,117 @@ for x in primes():
 
 print(L)
 
-
 # sort
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+
+
+def by_byname(x):
+    return x[0].lower()
+
+
+def by_byscore(x):
+    return x[1]
+
+
+# key 返回要比大小的值
+L2 = sorted(L, key=by_byname)
+print(L2)
+
+L3 = sorted(L, key=by_byscore, reverse=True)
+print(L3)
+
+
+# 返回函数  闭包
+def fun_test(*args):
+    def f_3():
+        sum = 0
+        for x in args:
+            sum = sum + x
+        return sum
+
+    return f_3
+
+
+f_1 = fun_test(*(1, 2, 3, 4, 5))
+f_2 = fun_test(*(1, 2, 3, 4, 5))
+f_1 == f_2  # false
+
+
+def count():
+    fs = []
+    for i in range(1, 4):
+
+        def f():
+            return i * i
+
+        fs.append(f)
+    return fs
+
+
+# 都是9，原因是返回值内不能使用循环变量，或者后续会发生变化的变量
+fs_l = count()
+fs_l[0]()
+fs_l[1]()
+fs_l[2]()
+
+# 匿名函数
+# lambda
+print(list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
+
+
+# 装饰器
+def debug1(func):
+    def wrapper(*args, **kw):
+        print('entry: %s' % func.__name__)
+        return func(*args, **kw)
+
+    return wrapper
+
+
+@debug1
+def test1():
+    print('hello')
+
+
+test1()
+
+
+# 带参数装饰器
+def debug2(text):
+    def decotator(func):
+        @functools.wraps(func)  # 指定name是func
+        def wrapper(*args, **kw):
+            print('%s entry %s' % (text, func.__name__))
+            return func(*args, **kw)
+
+        return wrapper
+
+    return decotator
+
+
+@debug2('debug2')  # = debug('hhhh')(test2)
+def test2(x):
+    print('test2 %d' % x)
+
+
+test2(333)
+
+# 偏函数创建一个简化的函数，改变默认参数
+int2 = functools.partial(int, base=2)
+int2('1111')  # 把base 从10 改到了2
+int2('1111', base=10)  # 不影响原来的使用方法
+
+
+def _private_1(name):
+    return 'Hello, %s' % name
+
+
+def _private_2(name):
+    return 'Hi, %s' % name
+
+
+def greeting(name):
+    if len(name) > 3:
+        return _private_1(name)
+    else:
+        return _private_2(name)
